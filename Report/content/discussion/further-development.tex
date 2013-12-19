@@ -1,0 +1,52 @@
+\section{Further Development}\label{section:further-development}
+During this project, a number of problems have been encountered. 
+These problems were discussed in \chapref{chapter:discussion}, ideas and features to solve these problems will be presented in this section.
+
+\subsection{Cross platform}
+As discussed earlier in this chapter, this project was focused on Windows Phone 8 using a Nokia Lumia 820. 
+However, making the application available on multiple platforms would open up to a bigger market. 
+To do this effectively, code could be ported to Unity which was shortly described in \secref{subsection:unity}. 
+Unity works with C\# which would make it easy to port the code, as it is able to compile the code for Windows Phone, iPhone, and Android.
+Next, a solution to the problem of noise on individual phones must be found. 
+This problem could be solved by calibrating when the application is used for the first time.
+The calibration would give the application all the information it needs to run correctly on the individual phone. 
+
+\subsection{Rotation Matrix}
+%Hvad er det?
+%Hvad kan det improve?
+%Hvad dårligt giver det programmet?
+%Hvordan kan det implementeres?
+%Hvorfor kom det ikke med?
+The application corrects the tilting of the phone when a yaw-rotation or pitch-rotation is done by the user.
+However, when the phone is rotated in both pitch and yaw, the correction of the acceleration is inaccurate.
+This inaccuracy happens because the acceleration has been used to determine the angle of the pitch and yaw before the acceleration in itself is corrected.
+
+To correct the acceleration when the phone is tilted in pitch, yaw, and roll, a rotation matrix can be used to multiply on the gravitational pull vector, $\vec{G} = \begin{bmatrix}
+0 & 0 & g
+\end{bmatrix}$ \cite{misc:rotation-matrix}.
+
+The implementation of the rotation matrix to correct for tilting, has not been done due to time constraints.
+However, if it was to be implemented, it would replace the SF node in the dynamic Bayesian network, the atan2 node, and the Comp node would have to find the missing angles. 
+
+In addition, if the rotation matrix was implemented, it could adjust the gravitational pull in three dimension and thereby simplify the change to additional dimensions.
+
+\subsection{Additional Dimensions}
+This project investigated dead reckoning in one dimension, but it is possible to expand the application to two or three dimensions. 
+Getting dead reckoning to work in two and three dimensions would enable a wide array of new gameplay and, hereby, the variation of exercise. 
+Considering two dimensions, it is possible to move forwards, backwards, sideways, and diagonal.  
+Since the precision of dead reckoning in one dimension is inaccurate, it is assumed that it is also inaccurate in two dimensions.
+To solve the inaccuracy of dead reckoning, observations such as Wi-Fi fingerprinting could be implemented.
+Although, when moving in three dimensions, additional problems can arise.
+
+\subsection{Motivational Factors}\label{section:motivational-factors}
+To implement a feature where players could compete against their friends, social networks such as \textit{Facebook} could be integrated. 
+Social networks would offer a platform from which social relations have already been established and thus simplify the process of the development of the application.
+Being able to turn the social network feature on or off would prevent the issue with people being discouraged from playing the game in case they want their game progress to be private. 
+Other factors could be developing additional games, such that people had a variety of games to play.
+Furthermore, motivational features can always be strived for to make the user exercise more, as discussed in \secref{section:requirements}.
+
+\subsection{Machine Learning}
+Machine learning is a technique in which the system saves data and uses it to create or enhance a model.
+Some factors in the application are unknown and could be found using machine learning to help improve dead reckoning.
+An example of these factors could be the variance gain from \secref{section:normal-distribution}, which is currently a fixed estimated value but could vary for different phones.
+Machine learning could be taxing for the phone and cause new problems, such as additional technology dependencies, excessive storage usage, and system delay.

@@ -1,0 +1,26 @@
+\section{Sensors}\label{section:sensors}
+The game for this project is intended to make people exercise, and it is therefore necessary that the game can track the users' movement.
+As a result, it is crucial that the platform, which the game is running on, has the sensors needed.
+Fortunately, this is the case for many smartphones.
+The necessary sensors to track the users' movement will be thoroughly examined.
+
+\subsection{Accelerometer}
+An accelerometer is a sensor that is used to track the acceleration of a given device and the information tracked is represented in three values.
+The three values are the acceleration in the x-, y-, and z-axis.
+The accelerometer can simulate a pedometer, where the differences in the acceleration values can be recognised as a step, this technique can be used in dead reckoning.
+The difference between a pedometer and an accelerometer is that the pedometer can only count steps, where the accelerometer readings can be used to calculate how far the steps are.
+Furthermore, the accelerometer is not limited to function as a pedometer and can use the tracked acceleration for other calculations such as game input.
+For this project the accelerometer can be used to track the user's movements. 
+
+\subsection{Gyroscope}
+A gyroscope is a sensor that is used to track the orientation of a given device, this information is represented in three values.
+These values are the orientation in the three axes.
+The gyroscope can be used as a compass, to do this the device has to know precisely which way is north before it can calculate which way the device is orientated.
+However, the measurement uncertainty can become a great concern the more the device is turned.
+The gyroscope can be used when creating dead reckoning algorithms, since it can calculate which way the device is orientated to determine when the device is turned.
+
+\subsection{Magnetometer}
+A magnetometer is a sensor which is used to track the magnetic field of the earth, but can also be affected by other magnetic fields.
+The magnetometer can show how the device is orientated, compared to the magnetic poles.
+The information can be used to track if the user is turning around.
+The magnetometer can help adjust the measurement uncertainty of the gyroscope.

@@ -1,0 +1,35 @@
+\section{FACTOR}\label{section:factor}
+FACTOR is a tool to provide a structure for the system definition \citep{book:OOAD}. 
+The different topics that FACTOR covers will be described hereafter.
+
+\subsubsection*{Functionality}
+A game where the user's movement is used as input to play the game.
+An elaborate description of the game will be explained in \secref{section:game-design}.
+
+\subsubsection*{Application Domain}
+The product will be a smartphone application, which can be used both indoor and outdoor with sufficient space to move around. 
+The smartphone application will be developed for a Windows Phone 8.
+
+\subsubsection*{Condition}
+Usable for people owning a Windows Phone 8, as described in \secref{section:targetaudience}.
+
+\subsubsection*{Technology}
+The application will run on a smartphone with Windows Phone 8, chosen to prove the concept, as the developers had experience with C\#.
+Furthermore, the smartphone is required to have an accelerometer, a gyroscope, and a magnetometer. 
+To track the user's movements, dead reckoning will be used.
+The tool used to develop the game is XNA, as discussed in \secref{section:game-development-tools}.
+
+\subsubsection*{Objects}
+The elements typically present in old arcade games will be represented as objects. For example, the ball and paddle in Pong. 
+
+\subsubsection*{Responsibility}
+The application has to track the movement of the user in a sufficiently accurate way, so the user does not move several steps without the application recognising it, which is very important for a reliable gameplay.
+
+
+
+
+%\fxnote{Klippet fra motivation, skal rettes til en system-def}
+%All these games have in common that the movement is left and right, and to register a person moving left and right, dead reckoning is suitable.
+%briefly described in \secref{section:dead-reckoning} and later in the theory chapter. \fxwarning{ref praecist til theory afsnittet naar det er skrevet} 
+%What is common for how dead reckoning should work, for all these games, is that they need an accelerometer and a gyroscope.
+%The fact that the mentioned sensors are readily available on smartphones also in itself serves as a way for people to start playing the game, since they do not need to buy new equipment, as might be opposed to Wi-Fi locationing, since that requires a Wi-Fi network to be setup.

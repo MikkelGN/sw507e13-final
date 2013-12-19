@@ -1,0 +1,42 @@
+\section{Network}
+The Network class is implemented to keep track of the current timeslice of the dynamic Bayesian network. 
+The Network contains nine properties corresponding to the nodes for a given timeslice.
+A timeslice can be seen in \figref{figure:dynamic-bayesian-network}.
+
+\begin{lstlisting}[caption={Constructor for Network}, label=lst:network-constructor, float=h, style=sharpc]
+public Network()
+{
+	Acceleration = new Acceleration(Vector3.Zero);
+	Gyroscope = new Gyroscope(Vector3.Zero);
+	ATan2 = new ATan2Angle(Acceleration);
+	ComplementaryFilter = new ComplementaryFilter();
+	SensorFusion = new SensorFusion(ComplementaryFilter, Acceleration);
+	MovingAverage = new MovingAverage(0.0f, 0.0f);
+	CorrectedMovingAverage = new CorrectedMovingAverage();
+	Velocity = new Velocity(0.0f, 0.0f);
+	Position = new Position(0.0f, Constants.POSITION_START);
+}
+\end{lstlisting}
+
+When the Network is initialised, all the variables of the Network get assigned to their default value as seen in \lstref{lst:network-constructor}.
+The reason for setting the variables to their default values, when initialising the Network, is to have a fixed-point to update the next timeslice.
+After the Network has been initialised, a similar method can then be used to update the network, for a new timeslice, corresponding to a new accelerometer reading.
+
+\begin{lstlisting}[caption={UpdateNetwork method in Network}, label=lst:network-update-network, float=h, style=sharpc]
+public void UpdateNetwork(Vector3 newAcceleration, Vector3 newGyroscope)
+{
+	Acceleration = new Acceleration(newAcceleration);
+	Gyroscope = new Gyroscope(newGyroscope);
+	ATan2 = new ATan2Angle(Acceleration);
+	ComplementaryFilter = new ComplementaryFilter(ATan2, Gyroscope, ComplementaryFilter);
+	SensorFusion = new SensorFusion(ComplementaryFilter, Acceleration);
+	MovingAverage = new MovingAverage(MovingAverage, SensorFusion);
+	CorrectedMovingAverage = new CorrectedMovingAverage(MovingAverage);
+	Velocity = new Velocity(Velocity, CorrectedMovingAverage);
+	Position = new Position(Position, Velocity);
+}
+\end{lstlisting}
+
+\lstref{lst:network-update-network} shows the method for updating the network to a new timeslice.
+The \lstinline$UpdateNetwork$ method updates the probabilities in the order of the dynamic Bayesian network, from parents to children, where each probability distribution update is handled in the given classes that are instantiated.
+The \textit{Acceleration} class, which is part of the Network, will be described hereafter.

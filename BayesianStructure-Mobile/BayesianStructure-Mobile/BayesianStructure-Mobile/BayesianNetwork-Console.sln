@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BayesianNetwork-Console", "BayesianNetwork-Console.csproj", "{7F989304-D234-4F60-B266-AF3B4F0BC57F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Debugging", "..\Debugging\Debugging.csproj", "{C7C9E087-243F-4D2D-A179-F84C30F14C8E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7F989304-D234-4F60-B266-AF3B4F0BC57F} = {7F989304-D234-4F60-B266-AF3B4F0BC57F}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F989304-D234-4F60-B266-AF3B4F0BC57F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F989304-D234-4F60-B266-AF3B4F0BC57F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F989304-D234-4F60-B266-AF3B4F0BC57F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F989304-D234-4F60-B266-AF3B4F0BC57F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7C9E087-243F-4D2D-A179-F84C30F14C8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7C9E087-243F-4D2D-A179-F84C30F14C8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7C9E087-243F-4D2D-A179-F84C30F14C8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7C9E087-243F-4D2D-A179-F84C30F14C8E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

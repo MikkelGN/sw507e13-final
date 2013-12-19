@@ -1,0 +1,83 @@
+\section{Dead Reckoning Approaches}\label{section:dead-reckoning-approaches}
+%Meta
+When implementing dead reckoning techniques, various approaches were attempted, which had different strengths and weaknesses.
+It proved to be a good learning experience, as it indicated what considerations were key to implement dead reckoning.
+
+%KUN areal - pege tilbage til teori
+% + nem, løbende udregninger
+% - upræcist, tog ikke højde for støj'
+\subsection*{Initial Approach}
+The initial approach was primarily based on the theory in \secref{sec:position-calculations}, which explained the relation between acceleration, velocity, and position. 
+It was done with an algorithm that recorded all accelerations.
+The algorithm used these values to calculate the velocity and the user's estimated position. 
+This approach was simple but suffered from noise, as the noise would also change the velocity and thus the position, without the user actually moving.
+
+%Inddeling i skridt, areal + filtrering.
+% + mere præcist
+% - stadig upræcist, ikke løbende udregninger, kompliceret.
+\subsection*{Filters}
+To reduce the noise impact on the position, a filter was implemented, see \secref{subsection:exponential-moving-average}. 
+It proved to be a fast and simple approach to reduce the noise impact.
+In order to prevent noise from having an impact on the position, when the user is not moving, an algorithm was developed.
+This approach hindered the algorithm from registering the position change, as it would only change the position once a complete step was taken.
+
+Another hindrance for the algorithm was when taking many steps to one side.
+Which rendered the algorithm unable to determine whether a step was to the left or to the right, as the steps were done with too high frequency. 
+For that reason, this algorithm was deemed undesirable as the intention of the algorithm was to be used in games, which requires a fast update.
+However, it would not have been a concern if updating the position during a step was not necessary.
+
+%Areal, med constraints og filtrering
+% + nem, præcist, løbende udregninger
+% - ikke så robust, tog ikke højde for tyngdeacceleration
+\subsection*{Constraints}
+With the previous approaches in mind, another algorithm was made, which had the same general idea of calculating the position with the theory from \secref{sec:position-calculations}.
+A calibration was done to filter out the acceleration offset noise. 
+
+Furthermore, when developing an algorithm with this approach, different constraints were added, to cancel out any undesired position-estimation updates.
+One constraint was setting a limit on the area a user was allowed to move within. 
+In the case where the user was estimated to be beyond this area, the position was set to the edge of the area.
+ 
+Another constraint was that if the acceleration was too low, it would be discarded.
+This acceleration was discarded since it would give a change in position when a step was not performed. 
+In addition, if the acceleration was under a specific limit for too long, the velocity was set to zero, as it was interpreted to the user standing still.
+Although this algorithm took noise into account, and the position accuracy was improved.
+A problem remained, if the phone was tilted as the gravitational pull would have an impact on the acceleration registered.
+Finally, whenever a step was taken, the deceleration would make the estimated position move backwards, since the deceleration was bigger than the corresponding acceleration, resulting in a velocity with opposite direction.
+
+In order to take the gravitational pull into account, the \textit{Motion} class from Microsoft \citep{misc:motionclass} was tested.
+The class used the accelerometer in conjunction with the gyroscope and the magnetometer to cancel out the gravitational pull.
+This seemed as an easy way to accomplish the goal.
+However, it was unclear how the Motion class altered the data, and for that reason it was not used further.
+
+\subsection*{Bayesian Structure}
+With these approaches in mind, a dynamic Bayesian network was modelled.
+It proved to give a good overview of the different calculations needed to determine the user's position.
+In addition, the marginal probability distribution for each stochastic variable was found by use of the theory from \secref{section:normal-distribution}.
+The variance, found when determining the marginal probability distribution, was not used, since no observations were used. 
+However, by calculating the variance, with observations on the position nodes, the network would be an extended Kalman filter.
+The variance would then have an influence on the mean of the marginal probability distribution of the position, as described in \secref{section:insert-evidence}.
+
+\subsection*{Corrected Moving Average}
+A problem found was the velocity gain, because of the deceleration being larger than the acceleration, resulting in the velocity being in the opposite direction than what was performed.
+This problem was solved by adjusting the deceleration to be the same as the acceleration with opposite direction. 
+The adjustment was a hack in the Bayesian network, as the mean value for the deceleration nodes were assigned to be the same but in the opposite direction of the accelerations of the step. 
+The adjustment is different from the direct combination approach, as described in \secref{section:direct-combination}, and therefore it is a hack.
+By implementing this hack, the velocity gain problem was corrected, but resulted in a limitation of how fast a user could take steps.
+It was deemed to not being a problem, as the game became playable, with the constraint in mind.
+
+\subsection*{Rotation}
+With the correction of the deceleration problem, another problem still existed, which was accidental phone-rotation when moving.
+To correct for pitch-rotation, the magnetometer of the phone was first used to determine the angle of the pitch-rotation.
+This angle would then be used in conjunction with trigonometry to correct the acceleration when moving.
+
+The yaw-rotation had to be taken into account, as the gravitational pull would affect the measured acceleration.
+In order to correct for gravitational pull, the gyroscope was used in conjunction with the accelerometer to determine the yaw-rotation angle.
+The gyroscope would, over time, drift and make the angle inaccurate.
+To avoid drifting, a complementary filter was implemented.
+The complementary filter used the angles determined by accumulating the gyroscope readings, as well as determining the angle by use of the accelerometer readings.
+
+With the correction of the gravitation pull implemented, it was found that the gyroscope and accelerometer approach was better than using the compass for this application.
+Therefore, the gyroscope was used to handle both pitch- and yaw-rotation, as the compass was slow to adjust to a new angle, whereas the gyroscope and accelerometer was faster.
+
+After having used these various approaches, four constraints remained. 
+These constraints will be explained in more details in the next section.

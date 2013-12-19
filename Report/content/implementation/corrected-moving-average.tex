@@ -1,0 +1,16 @@
+\section{CorrectedMovingAverage}
+The \textit{CorrectedMovingAverage} class adjusts the acceleration, such that a deceleration of a step is the same size as the acceleration of the step.
+This adjustment is done with the help of a stack which saves each step of an acceleration, such that it can be used for the corresponding deceleration.
+As mentioned in \secref{section:dead-reckoning-approaches}, it is a hack, since it does not follow the defined rules for updating the marginal probability distributions.
+However, it proved to be a good solution that takes the velocity gain into account.
+
+To track the direction of a step, an enumerator was created which had the elements \textit{Unknown}, \textit{Left}, and \textit{Right}. 
+When the step direction is unknown, a step has not been detected yet and the program checks each acceleration to see if it is outside the jitter zone.
+Jitter noise occurs when the user unintentionally shakes the phone.
+The jitter zone is an interval specifying where jitter noise can occur.
+When the acceleration is higher than the jitter zone, a right step has begun, and if it is lower, it is a left step.
+This categorisation is done with the knowledge of how an acceleration graph for a step is shaped, and is found in \secref{section:accelerometer}.
+In addition, when a step has been detected, the velocity is reset to zero as the step has just begun.
+
+If a step is in progress, every next acceleration, which is in the same direction, is loaded into a stack.
+Once the deceleration has begun, the stack is popped for each consecutive deceleration.

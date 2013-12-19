@@ -1,0 +1,40 @@
+\section{Game Development Tools}\label{section:game-development-tools}
+One of the hard requirements, seen in \secref{section:requirements}, is the development of a game. 
+In order to ease the development of this game, two game development tools will be analysed.
+The target platform of this project is Windows Phone 8, therefore the tools have to work on this specific platform.
+There are many different tools for developing games on the Windows Phone 8 platform, however, in this report the focus is on XNA and Unity.
+These tools have been selected due to their popularity as well as documentation.
+
+
+\subsection{Unity}\label{subsection:unity}
+Unity is a software game engine in which it is possible to create a game, where the engine provides functionalities.
+Unity has a lot of available features for creating a game, such as game mechanics, 3D modelling environment, and a lot of existing scripts to ease the game development.
+While a lot of the mechanics is predefined it still remains possible to edit and create mechanics such as physics within a game.
+
+There are three available programming languages in Unity, namely C\#, JavaScript, and Boo.
+Unity uses .NET 2.0 according to \citet{misc:UnityNet}. 
+Because Unity uses \textit{monoDeveloper 2.8.2} as its main IDE, Unity uses C\# version 4.0 \citep{misc:MonoVersion}.
+It means that some features that are dependable on a .NET framework higher than 2.0 will not work in Unity.
+When programming an application in Unity it can be ported to a wide range of platforms, which include Android, iOS, and Windows Phone.
+
+
+\subsection{XNA}
+XNA is a software game development framework in which it is possible to develop games.
+%However, unlike Unity, XNA does not support drag and drop or have any visual feedback when creating the environment.
+%Thus, when creating an application in XNA, only coding is available for the programmer.
+The XNA framework supports the developer with libraries that allow the developer to construct a game, where the game mechanics are written by the developer.
+Due to XNA being a framework, it does not have a user interface.
+
+When programming in XNA the programmers are able to program in C\#, Visual Basic, F\#, JavaScript, and C++.
+XNA is a Microsoft product and can be ported to any Microsoft platform. 
+XNA has some built-in features that makes it easy to make games, such as network communication.
+XNA runs on the .NET framework 4.0 \citep{misc:XNAVersion}, which means that XNA can use features supported by the .NET 4.0 framework.
+
+\subsection{Summary}
+Both applications provides a variety of features for creating games.
+When it comes to game development, both of them are equally fit, as obtaining information from the sensors requires a single instruction \citep{misc:UnitySensor, misc:WindowsPhoneSensor}.
+Unity offers a user friendly 3D environment whereas XNA is purely textbased and therefore less user friendly.
+Since both of the applications offer C\# as a programming language, this means potentially both could be used for the project, corresponding to the chosen development language specified in \secref{section:limitations}.
+Both applications supports various target platforms, but Unity has a wider variety of platforms the application can be ported to.
+However, the variety of supported platforms is not a factor for this project as the project is for Windows Phone 8.
+In conclusion of this it has been decided to use XNA because it uses a newer version of .NET framework, and since an extensive visual platform is not needed to create a simple game.

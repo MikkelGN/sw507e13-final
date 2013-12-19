@@ -1,0 +1,42 @@
+\section{Events}\label{section:event-table}
+The event table in \tabref{table:event-table} represents the possible events in the game and how they are connected to the classes.
+The classes used are \textit{Paddle}, \textit{Ball}, \textit{Time}, and \textit{Score}.
+The Paddle class ensures that the movements of the player corresponds to the paddle in the game.
+The Ball class represents the ball which moves on the board, and can bounce off the walls and the paddle. 
+Time starts when the game starts and stops when the ball is not caught.
+Time is also used to limit the duration of power-ups and increases the score as time passes.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{| c | c | c | c | c |}
+\hline
+ & Paddle & Ball & Time & Score \\\hline
+Lose game & & + & + & + \\ \hline
+Move & * & & & \\ \hline 
+Spawn ball & & + & &  \\\hline
+Despawn ball & & + & &  \\\hline
+Spawn power-up & & & * & \\\hline
+Change paddle size  & * & & & \\\hline
+Increase ball speed & & * & * & \\\hline
+Decrease ball speed & & * & & \\\hline
+Increase score & & & * & *\\\hline
+Score multiplier & & & & * \\\hline
+\end{tabular}
+\caption{Event Table, * meaning zero to many and + meaning zero to one.}
+\label{table:event-table}
+\end{table}
+
+\textit{Lose game} is an event that happens when the ball is not caught by the paddle. 
+When the event occurs, the time is stopped and the Score is saved in case the user wants to submit it to the high score.
+To avoid losing the game, the paddle has to be able to move.
+The \textit{Move} event works together with dead reckoning to get the movement of the player, and enables the paddle to move left and right.
+
+\textit{Spawn power-up} is an event that spawns a power-up in the game, which occurs randomly after some time.
+One of the power-ups that can spawn is a power-up that increases the paddle size and the counterparting power-up decreases the paddle size.
+
+The ball spawns when the game starts, and despawns when the ball is not caught.
+This is handled by the \textit{Spawn ball} and \textit{Despawn ball} events.
+The ball speed is increased over time, but can also be changed with the help of power-ups, which is the \textit{Increase ball speed} and \textit{Decrease ball speed} event.
+
+The score can be affected by two different events.
+\textit{Increase score} happens over time, whereas \textit{Score multiplier} occurs when its corresponding power-up is caught, resulting in either a doubling or halving of the score, depending on the power-ups colour.

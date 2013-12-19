@@ -1,0 +1,11 @@
+\section{Acceleration}
+Acceleration is a class implemented to represent the $Acc$ node from the Bayesian network. It inherits from the abstract Variable class, where the Variable class serves as a structure that all nodes in the network must have.
+
+Since Acceleration inherits from Variable it has to implement two methods, \lstinline$UpdateVariance$ and \lstinline$UpdateMean$.
+The mean value is the accelerometer reading.
+The variance for the acceleration is a constant value and is determined by testing, which is described in \secref{section:finding-the-variance}.
+Furthermore, when inheriting from Variable a matrix multiplication method is provided, as well as four properties, keeping track of a stochastic variable's mean, variance, and its parents.
+
+The readings from the accelerometer were uncertain, as of such, the variance for the accelerometer readings was determined, which is described hereafter.
+
+\input{content/implementation/finding-the-variance}
