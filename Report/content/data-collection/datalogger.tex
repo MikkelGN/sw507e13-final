@@ -1,7 +1,0 @@
-\section{Data logger}\label{section:datalogger}
-All the data in this project has been logged, using a Nokia Lumia 820 running Windows Phone 8.
-The data logger has been used to understand the output of the phone's different sensors.
-It works by recording output from the accelerometer, the gyroscope, and the magnetometer, the collected data can then be sent to a web-service, which stores the data in a database.
-To make sure that the data logger does not overburden the database with update-requests, all the sensor-data is stored locally, and sent to the web-service once recording is complete.
-%The data is sent by a web client, and it is therefore possible to sent multiple data sets together.
-The data has been sent through a web-service because Windows Phone 8 does not offer a framework which works directly with MySQL.

@@ -1,4 +1,0 @@
- - Spil kilder, 22-25, skal nok fjernes, er ubruglige atm og behøver nok heller ikke at have kilder
- - Kilde 26, Unity guide c#, fortæller ikke det den skulle (at unity bruger C# 4.0) (DONE!!!! -Hamun)
- - mangler kilde misc:cardio-exercise, slettet pga. sourceforge fejl
- 
